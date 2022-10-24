@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tech Blog</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/resetstylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="/css/simple.css">
+
+</head>
+
+<body>
+    <header>
+        <div class="left">
+            <a class="logo-image" href="/">
+                <h2>TechBlog</h2>
+                <img src="/images/TechBlog_Logo.png" alt="TechBlog logo" height="50" />
+            </a>
+        </div>
+        <div class="middle">
+            <h1>{{pageName}}</h1>
+        </div>
+        <div class="right">
+            <a id="addPost" class="bttn bttn-primary" style="{{style userID userID}}"><span class="material-icons">add</span></a>
+            {{#if loggedIn}}
+            {{#screenCheckINV "Dashboard" pageName}}
+            <a href="/dashboard" class="bttn bttn-primary">Dashboard</a>
+            {{else}}
+            <a href="/" class="bttn bttn-primary">Homepage</a>
+            {{/screenCheckINV}}
+            <a href="/logout" class="bttn bttn-danger">Log Out</a>
+            {{else }}
+            {{#screenCheckINV "Login" pageName}}
+            <a href="/login" class="bttn bttn-primary">Sign-in </a>
+            {{/screenCheckINV}}
+            {{/if}}
+        </div>
+    </header>
+    <main>
+        <div id="modalForm" data-activeForm="none" style="display:none" class="card-holder">
+            
+                {{>create-comment currentUser=userID}}
+
+        </div>
+        <div class="card-holder">
+            {{{body}}}
+        </div>
+
+    </main>
+    </footer>
+</body>
+
+</html>
+<script src="/js/formPost.js"> </script>

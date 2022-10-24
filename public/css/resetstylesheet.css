@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+    block-size: border-box;
+    color: unset;
+    background-color: unset;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    line-height: 1;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+button {border: none}
+

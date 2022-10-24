@@ -1,0 +1,38 @@
+<div class="card-post">
+  <div class="card-title">
+    <div class="left">
+      <h7>{{user.username}}</h7>
+      <h7 class="text-muted">
+        {{format_date createdAt}}
+        {{#compareDate createdAt updatedAt}}
+        <span>**UPDATED**</span>
+        {{/compareDate}}
+      </h7>
+    </div>
+    <div class="middle">
+      <h4>{{title}}</h4>
+    </div>
+    <div class="right">
+      <span class="bttn material-icons editPost" data-id={{id}} style="{{style currentUser user.id}}">edit</span>
+      <span class="bttn material-icons deletePost" data-id={{id}} style="{{style currentUser user.id}}">delete_outline</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{post}}</p>
+    <div>
+      <h6>Comments</h6>
+
+      {{#if comments}}
+      <div class="card-holder">
+        {{#each comments as |comment|}}
+        {{>comment-card currentUser=../currentUser}}
+        {{/each}}
+      </div>
+
+      {{else}}
+      <p class="text-muted">NO COMMENTS</p>
+      {{/if}}
+    </div>
+  </div>
+</div>
+

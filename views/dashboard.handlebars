@@ -1,0 +1,8 @@
+<div>
+  <h2>My Posts</h2>
+</div>
+<div class="card-holder">
+  {{#each posts as |post|}}
+  {{>post-card currentUser=../userID}}
+  {{/each}}
+</div>
