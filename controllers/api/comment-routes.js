@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const { Post, Comment, Tag, PostTag, User } = require('../../models');
+const withAuth = require('../../utils/auth');
+
 
 router.get('/', async (req, res) => {
   try {
@@ -47,32 +49,35 @@ router.get('/:id', async (req, res) => {
 });
 
 // create new post
-router.post('/', (req, res) => {
-  Comment.create(req.body)
-    .then((post) => {
-      res.status(200).json(post);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(400).json(err);
-    });
+router.post('/', async (req, res) => {
+  const body = req.body
+  console.log({ ...body, date_created: Date.now(),user_id: req.session.userID })
+  try {
+    const newComment = Comment.create( { ...body, date_created: Date.now(),user_id: req.session.userID } )
+    res.status(200).json(newComment);
+  }catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
 });
 
-// update product
-router.put('/:id', (req, res) => {
-  Comment.update(req.body, {
-    where: {
-      id: req.params.id,
-    },
-  })
-    .then((post) => {
-      // find all associated tags from ProductTag
-      return PostTag.findAll({ where: { post_id: req.params.id } });
-    })
-    .catch((err) => {
-      // console.log(err);
-      res.status(400).json(err);
+router.put('/:id', async (req, res) => {
+  var body = req.body
+  try {
+    const [affectedRows] = await Comment.update({...body,date_modified: Date.now()}, {
+      where: {
+        id: req.params.id,
+      },
     });
+
+    if (affectedRows > 0) {
+      res.status(200).end();
+    } else {
+      res.status(404).end();
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 router.delete('/:id', async (req, res) => {

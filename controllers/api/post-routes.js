@@ -59,7 +59,7 @@ router.post('/', withAuth, async (req, res) => {
   const body = req.body;
   console.log("this is posting")
   try {
-    const newPost = await Post.create({ ...body, user_id: req.session.userID });
+    const newPost = await Post.create({ ...body, date_created: Date.now() ,user_id: req.session.userID });
     res.json(newPost);
   } catch (err) {
     res.status(500).json(err);
@@ -68,9 +68,9 @@ router.post('/', withAuth, async (req, res) => {
 
 // update product
 router.put('/:id', withAuth, async (req, res) => {
-  // update product data
+  const body = req.body
   try {
-    const [affectedRows] = await Post.update(req.body, {
+    const [affectedRows] = await Post.update({...body,date_modified: Date.now()}, {
       where: {
         id: req.params.id,
       },

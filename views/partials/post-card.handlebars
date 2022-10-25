@@ -4,24 +4,25 @@
       <h7>{{user.username}}</h7>
       <h7 class="text-muted">
         {{format_date createdAt}}
-        {{#compareDate createdAt updatedAt}}
+        {{#compareDateINV createdAt updatedAt}}
         <span>**UPDATED**</span>
-        {{/compareDate}}
+        {{/compareDateINV}}
       </h7>
     </div>
     <div class="middle">
       <h4>{{title}}</h4>
     </div>
     <div class="right">
-      <span class="bttn material-icons editPost" data-id={{id}} style="{{style currentUser user.id}}">edit</span>
-      <span class="bttn material-icons deletePost" data-id={{id}} style="{{style currentUser user.id}}">delete_outline</span>
+      <a class="bttn material-icons" href="/post/edit/{{id}}" style="{{style currentUser user.id}}">edit</a>
     </div>
   </div>
   <div class="card-body">
     <p class="card-text">{{post}}</p>
     <div>
       <h6>Comments</h6>
-
+      {{#compareValues currentUser currentUser}}
+      {{>create-comment postId = ../id }}
+      {{/compareValues}}
       {{#if comments}}
       <div class="card-holder">
         {{#each comments as |comment|}}
@@ -35,4 +36,3 @@
     </div>
   </div>
 </div>
-

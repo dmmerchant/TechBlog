@@ -1,9 +1,6 @@
 <div class="card-post">
       <div class="card-title primaryOVRD">
             <div class="left">
-                  <h4>{{title}}</h4>
-            </div>
-            <div class="middle">
                   <h7>{{user.username}}</h7>
                   <h7 class="text-muted">
                         {{format_date createdAt}}
@@ -12,9 +9,11 @@
                         {{/compareDate}}
                   </h7>
             </div>
-            <div class="right"> 
-                  <span class="material-icons" style="{{style currentUser user.id}}">edit</span>
-                  <span class="material-icons" style="{{style currentUser user.id}}">delete_outline</span>
+            <div class="middle">
+                  <h4>{{title}}</h4>
+            </div>
+            <div class="right">
+                  <a href="/comment/edit/{{id}}" class="material-icons" style="{{style currentUser user.id}}">edit</a>
             </div>
       </div>
       <div class="card-body">

@@ -36,7 +36,7 @@ module.exports = {
   },
   style: (value1,value2,invert = false) => {
     if (!value1) {
-      return (invert) ? "display: initial" : "display: none";
+      return (invert) ? "display: none" : "display: initial";
     }
     result = (value1 == value2);
     if (invert) {
