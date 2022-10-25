@@ -28,7 +28,7 @@ const postToggle = () => {
 //#region Form Submission Routines
 const newPostHandler = async function (event) {
   event.preventDefault();
-  form = event.target();
+  form = event.target;
   const title = form.querySelector('input[name="post-title"]').value;
   const post = form.querySelector('textarea[name="post-body"]').value;
   console.log(title);
